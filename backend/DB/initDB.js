@@ -9,8 +9,8 @@ const initDB = async (req, res, next) => {
     connection = await getDB();
 
     await connection.query('DROP TABLE IF EXISTS users');
-    await connection.query('DROP TABLE IF EXISTS photos');
     await connection.query('DROP TABLE IF EXISTS posts');
+    await connection.query('DROP TABLE IF EXISTS photos');
     await connection.query('DROP TABLE IF EXISTS comments');
     await connection.query('DROP TABLE IF EXISTS likes');
     await connection.query('DROP TABLE IF EXISTS chat');
@@ -29,6 +29,18 @@ const initDB = async (req, res, next) => {
     `);
 
     console.log('USER TABLE CREATED');
+
+            // Crear la tabla de entradas.
+            await connection.query(`
+            CREATE TABLE posts (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                description TEXT,
+                idUser INT NOT NULL,
+                FOREIGN KEY (idUser) REFERENCES users(id) ON DELETE CASCADE,
+                createdAt DATETIME NOT NULL,
+            )
+        `);
+
 
   } catch (error) {
     console.error(error.message);
