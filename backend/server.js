@@ -19,9 +19,8 @@ app.use(morgan('dev'));
 */
 
 //ENDPOINTS
+const { createUser } = require('./controllers/users/index');
 
-const { createUser } = require('./controllers/users/createUser');
-const { h } = require('./controllers/users/h') 
 
 app.post('/newuser', createUser );
 
