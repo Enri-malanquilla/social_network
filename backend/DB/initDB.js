@@ -8,12 +8,12 @@ const initDB = async (req, res, next) => {
   try {
     connection = await getDB();
 
-    await connection.query('DROP TABLE IF EXISTS users');
-    await connection.query('DROP TABLE IF EXISTS posts');
+    await connection.query('DROP TABLE IF EXISTS chat');
+    await connection.query('DROP TABLE IF EXISTS likes');
     await connection.query('DROP TABLE IF EXISTS comments');
     await connection.query('DROP TABLE IF EXISTS photos');
-    await connection.query('DROP TABLE IF EXISTS likes');
-    await connection.query('DROP TABLE IF EXISTS chat');
+    await connection.query('DROP TABLE IF EXISTS posts');
+    await connection.query('DROP TABLE IF EXISTS users');
     console.log('TABLES REMOVED');
 
     //USER'S TABLES
