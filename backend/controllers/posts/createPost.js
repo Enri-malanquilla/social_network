@@ -6,7 +6,12 @@ const createdPost = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        console.log('endpoint post');
+        //id user in token
+        const idReqUser = req.userAuth.id;
+
+
+
+        console.log(idReqUser);
 
         res.send({
             status: 'ok'

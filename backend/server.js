@@ -18,6 +18,8 @@ app.use(morgan('dev'));
 #######################
 */
 
+const authUser = require('./middlewares/authUser');
+
 //ENDPOINTS
 
 //USERS
@@ -29,9 +31,9 @@ app.post('/login', loginUser);
 
 //POSTS
 
-const{ createPost } = require('./controllers/posts/index')
+const{ createPost } = require('./controllers/posts/index');
 
-app.post('/add-post', createPost)
+app.post('/add-post', authUser, createPost)
 
 /**********************
  * ERROR*************
