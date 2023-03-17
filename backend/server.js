@@ -19,11 +19,11 @@ app.use(morgan('dev'));
 */
 
 //ENDPOINTS
-const { createUser } = require('./controllers/users/index');
+const { createUser, loginUser } = require('./controllers/users/index');
 
 
 app.post('/newuser', createUser );
-
+app.post('/login', loginUser);
 
 /**********************
  * ERROR*************

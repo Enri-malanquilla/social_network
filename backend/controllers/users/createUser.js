@@ -7,18 +7,18 @@ const createUser = async (req, res, next) => {
         connection = await getDB();
 
         // check the field of request
-        const { email, password } = req.body;
+        const { name, password } = req.body;
 
-        // check email exists
+        // check name exists
         const [user] = await connection.query(
-            `SELECT id FROM users WHERE email = ?`,
-            [email]
+            `SELECT id FROM users WHERE name = ?`,
+            [name]
         );
 
         // if exists user throw error
         if (user.length > 0) {
             const error = new Error(
-                'Ya existe un usuario registrado con ese email'
+                'Ya existe un usuario registrado con ese nombre'
             );
             error.httpStatus = 409;
             throw error;
@@ -27,8 +27,8 @@ const createUser = async (req, res, next) => {
 
         // save the user in database
         await connection.query(
-            `INSERT INTO users (email, password, createdAt) VALUES (?, SHA2(?, 512), ?)`,
-            [email, password, new Date()]
+            `INSERT INTO users (name, password, created_user) VALUES (?, SHA2(?, 512), ?)`,
+            [name, password, new Date()]
         );
 
         res.send({
